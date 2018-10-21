@@ -23,7 +23,7 @@ describe('Компонент Task:', () => {
         });
 
         describe('должен иметь свойство класса со ссылкой (ref) на элемент <input />:', () => {
-            test('должно называться «taskInput»', () => {
+            test.only('должно называться «taskInput»', () => {
                 expect(result.instance().taskInput).toBeDefined();
             });
 
