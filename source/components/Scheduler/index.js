@@ -115,20 +115,31 @@ export default class Scheduler extends Component {
     };
 
     render () {
-        const { isTasksFetching, newTaskMessage, tasksFilter } = this.state;
+        const {
+            isTasksFetching,
+            newTaskMessage,
+            tasksFilter,
+            tasks,
+        } = this.state;
         const messageMaxLength = 50;
 
+        const tasksJSX = tasks.map((task) => <Task { ...task } key = { task.id } />);
+
         return (
-            
             <section className = { Styles.scheduler }>
                 <Spinner isSpinning = { isTasksFetching } />
                 <main>
                     <header>
                         <h1>Планировщик задач</h1>
-                        <input placeholder = 'Поиск' type = "search" value = { tasksFilter } onChange = { this._updateTasksFilter } />
+                        <input
+                            placeholder = 'Поиск'
+                            type = 'search'
+                            value = { tasksFilter }
+                            onChange = { this._updateTasksFilter }
+                        />
                     </header>
                     <section>
-                        <form onSubmit = { this._createTaskAsync } >
+                        <form onSubmit = { this._createTaskAsync }>
                             <input
                                 maxLength = { messageMaxLength }
                                 placeholder = 'Описaние моей новой задачи'
@@ -139,7 +150,10 @@ export default class Scheduler extends Component {
                             <button>Добавить задачу</button>
                         </form>
                     </section>
-                    <Task />
+                    <ul>
+                        {tasksJSX}
+                    </ul>
+            
                 </main>
             </section>
         );
